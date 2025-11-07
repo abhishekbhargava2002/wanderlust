@@ -1,0 +1,193 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter {
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+            color: #000;
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .filter p {
+            font-size: 0.7rem;
+        }
+
+        .tax-info {
+            display: none;
+        }
+
+        .tax-toggle {
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 3.5rem;
+            padding: 1rem;
+            margin-left: 2rem;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+    <body>
+        <!-- STEP-6 -->
+        <!-- add UI for filter -->
+        <div id="filters">
+            <a href="/listings?category=Trending" class="filter <%= category === 'Trending' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </a>
+
+            <a href="/listings?category=Hotels" class="filter <%= category === 'Hotels' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-hotel"></i></div>
+                <p>Hotels</p>
+            </a>
+
+            <a href="/listings?category=Cafes" class="filter <%= category === 'Cafes' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-mug-saucer"></i></div>
+                <p>Cafes</p>
+            </a>
+
+            <a href="/listings?category=Nature" class="filter <%= category === 'Nature' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-tree"></i></div>
+                <p>Nature</p>
+            </a>
+
+            <a href="/listings?category=City Stay" class="filter <%= category === 'City Stay' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-city"></i></div>
+                <p>City Stay</p>
+            </a>
+
+            <a href="/listings?category=Beach" class="filter <%= category === 'Beach' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beach</p>
+            </a>
+
+            <a href="/listings?category=Mountains" class="filter <%= category === 'Mountains' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </a>
+
+            <a href="/listings?category=Historic" class="filter <%= category === 'Historic' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-building-columns"></i></div>
+                <p>Historic</p>
+            </a>
+
+            <a href="/listings?category=Amazing Pools"
+                class="filter <%= category === 'Amazing Pools' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing Pools</p>
+            </a>
+
+            <a href="/listings?category=Camping" class="filter <%= category === 'Camping' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </a>
+
+            <a href="/listings?category=Boats" class="filter <%= category === 'Boats' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boats</p>
+            </a>
+
+            <a href="/listings?category=Pet Friendly" class="filter <%= category === 'Pet Friendly' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-paw"></i></div>
+                <p>Pet Friendly</p>
+            </a>
+
+            <a href="/listings?category=Homes" class="filter <%= category === 'Homes' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-house"></i></div>
+                <p>Homes</p>
+            </a>
+
+            <a href="/listings?category=Luxury" class="filter <%= category === 'Luxury' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-crown"></i></div>
+                <p>Luxury</p>
+            </a>
+
+            <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                    <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Card Creating by styling index -->
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+            <% for(let list of allListings) { %>
+                <!-- add on url of card -->
+                <a href="/listings/<%= list._id %>" class="listing-link">
+
+                    <div class="card col listing-card ">
+                        <img src="<%= list.image.url %>" class="card-img-top" alt="list.image.filename"
+                            style="height: 20rem">
+                        <!-- Overeffect in the image -->
+                        <div class="card-img-overlay"></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b>
+                                    <%= list.title %>
+                                </b> <br>
+                                <%= list.price.toLocaleString("en-IN") %> / night
+                                    <i class="tax-info">&nbsp; &nbsp; +18 GST</i>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+        </div>
+
+
+
+
+
+        <Script>
+            //Making Tax Swith function
+            let taxSwitch = document.getElementById("switchCheckDefault");
+            taxSwitch.addEventListener("click", () => {
+                let tax = document.getElementsByClassName("tax-info");
+                for (info of tax) {
+                    if (info.style.display != "inline") {
+                        info.style.display = "inline"; // show it
+                    } else {
+                        info.style.display = "none"; // hide it
+                    }
+                }
+            })    
+        </Script>
+
+    </body>

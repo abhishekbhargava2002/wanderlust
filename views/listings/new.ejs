@@ -1,0 +1,70 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <br><br>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h1>Create a New Listing</h1>
+                <form method="POST" action="/listings" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input placeholder="Title" name="title" class="form-control" type="text" required>
+                        <div class="valid-feedback"> Looks good! </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" placeholder="Enter Description" class="form-control"
+                            required></textarea>
+                        <div class="invalid-feedback">Enter the description!</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Link</label>
+                        <input placeholder="Enter image URL/Link" name="image" class="form-control" type="text">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input placeholder="Price" name="price" class="form-control" required>
+                        <div class="invalid-feedback">Enter the price!</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">City</label>
+                        <input placeholder="where" name="location" class="form-control" type="text" required>
+                        <div class="invalid-feedback">Enter the location!</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input placeholder="In Which country" name="country" class="form-control" type="text" required>
+                        <div class="invalid-feedback">Enter the country!</div>
+                    </div>
+                    <!-- Category   STEP-5  -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category" class="form-select" required>
+                            <option value="">-- Select Category --</option>
+                            <option value="Trending">Trending</option>
+                            <option value="Hotels">Hotels</option>
+                            <option value="Cafes">Cafes</option>
+                            <option value="Nature">Nature</option>
+                            <option value="City Stay">City Stay</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Historic">Historic</option>
+                            <option value="Amazing Pools">Amazing Pools</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Boats">Boats</option> 
+                            <option value="Pet Friendly">Pet Friendly</option>
+                            <option value="Homes">Homes</option>
+                            <option value="Luxury">Luxury</option>
+                        </select>
+                        <div class="invalid-feedback">Select the option!</div>
+                    </div>
+
+
+                    <button class="btn btn-dark">Add</button>
+                </form>
+            </div>
+        </div>
+        <br>
+    </body>
