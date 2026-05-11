@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 //Project: Phase-1(part-a)
 //Basic set up
@@ -12,7 +12,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 //mongo session store step-1
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
 
 const flash = require("connect-flash");
 //Configuring Strategy - 1
@@ -33,8 +33,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const mongodb_url = "mongodb://127.0.0.1:27017/wanderlust";
 //Always wrap your connection string in quotes
-const dbs_url =process.env.DB_URL;
-
+const dbs_url = process.env.DB_URL;
 
 //Database connection
 main()
@@ -47,27 +46,23 @@ async function main() {
   await mongoose.connect(dbs_url);
 }
 
-
-
 //mongo store step-2
-const store = MongoStore.create( {
-    mongoUrl: dbs_url,
-    crypto: {
-      secret: process.env.SESSION_SECRET,
-    },
-    touchAfter: 24*3600,  //24-hours after data is remove
-})
+const store = MongoStore.create({
+  mongoUrl: dbs_url,
+  crypto: {
+    secret: process.env.SESSION_SECRET,
+  },
+  touchAfter: 24 * 3600, //24-hours after data is remove
+});
 
-store.once("error",() =>{
-  console.log("error in monogo session",err);
-})
-
-
+store.once("error", () => {
+  console.log("error in monogo session", err);
+});
 
 // Implement session in project
 // 1 Session setup (flash uses session)
 const sessionOptions = {
-  store,    //data is stored in atlos database
+  store, //data is stored in atlos database
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
@@ -79,12 +74,6 @@ const sessionOptions = {
     httpOnly: true, // Helps prevent XSS attacks (client-side JS can't access cookie)
   },
 };
-
-
-
-
-
-
 
 //Enable session middleware
 app.use(session(sessionOptions));

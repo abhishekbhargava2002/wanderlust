@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 const Review = require("./review.js"); //import form review.js
 const { listingSchema } = require("../schema.js");
 const Schema = mongoose.Schema;
-const { CATEGORIES } = require("../utils/categories");//STEP - 2
-
- 
+const { CATEGORIES } = require("../utils/categories"); //STEP - 2
 
 const ListingSchema = new Schema({
   title: {
@@ -13,12 +11,12 @@ const ListingSchema = new Schema({
   },
   description: String,
   image: {
-    fullname: String, 
+    fullname: String,
     url: String,
   },
   price: Number,
   //STEP-3 SearchBar
-  location: String, 
+  location: String,
   country: String,
   reviews: [
     {
@@ -32,11 +30,9 @@ const ListingSchema = new Schema({
   },
   category: {
     type: String,
-    enum: CATEGORIES,     // Enforce allowed values
+    enum: CATEGORIES, // Enforce allowed values
   },
 });
-
-
 
 //Phase-2 (a)
 //Handling: Delete Listings
@@ -45,7 +41,6 @@ ListingSchema.post("findOneAndDelete", async (listing) => {
     await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
 });
-
 
 const Listing = mongoose.model("Listing", ListingSchema);
 module.exports = Listing;

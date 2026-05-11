@@ -9,28 +9,32 @@ const listingSchema = Joi.object({
   location: Joi.string().required(),
   country: Joi.string().required(),
   //STEP-4
-  category: Joi.string().valid(
-      "Trending", "Hotels", "Cafes", "Nature", "City Stay",
-      "Beach", "Mountains", "Historic", "Amazing Pools",
-      "Camping", "Boats", "Pet Friendly", "Homes", "Luxury"
-    ).required(),
+  category: Joi.string()
+    .valid(
+      "Trending",
+      "Hotels",
+      "Cafes",
+      "Nature",
+      "City Stay",
+      "Beach",
+      "Mountains",
+      "Historic",
+      "Amazing Pools",
+      "Camping",
+      "Boats",
+      "Pet Friendly",
+      "Homes",
+      "Luxury",
+    )
+    .required(),
 });
 
-
 module.exports = { listingSchema };
-
-
-
-
-
-
- 
-
 
 //validation for Review in server-side
 module.exports.reviewSchema = Joi.object({
   review: Joi.object({
     rating: Joi.number().required().min(1).max(5),
     comment: Joi.string().required(),
-  }).required()
-})
+  }).required(),
+});
